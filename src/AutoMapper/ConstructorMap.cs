@@ -18,17 +18,8 @@ public sealed class ConstructorMap
         get => _canResolve ??= ParametersCanResolve();
         set => _canResolve = value;
     }
-    bool ParametersCanResolve()
-    {
-        foreach (var param in _ctorParams)
-        {
-            if (!param.IsMapped)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+    bool ParametersCanResolve() => _ctorParams.All(param => param.IsMapped);
+    
     public ConstructorParameterMap this[string name]
     {
         get
